@@ -16,8 +16,8 @@ namespace RESTaurant.App
             CheckGetById();
             CheckGetByName();
             CheckInsert();
-            CheckUpdate();
-            CheckDelete();
+            //CheckUpdate();
+            //CheckDelete();
         }
 
         private static void CheckDelete()
@@ -31,7 +31,7 @@ namespace RESTaurant.App
         {
             InsertSampleData();
             var restaurants = restaurantService.GetByName("aridinar");
-            restaurantService.DeleteByName("aridinar"); //Break Point here
+            //restaurantService.DeleteByName("aridinar"); //Break Point here
         }
 
         private static void CheckGetByName()
