@@ -58,10 +58,10 @@ namespace RESTaurant.App
 
         private static void InsertSampleData()
         {
-            var address = new Address()
+            var address = new Address
             {
                 Building = "Building",
-                Coord = new List<double>() { 12D, 15D },
+                Coord = new List<double> { 12D, 15D },
                 Street = "street",
                 Zipcode = "zipcode"
             };
@@ -72,12 +72,19 @@ namespace RESTaurant.App
                 address,
                 "Borough",
                 "turkish",
-                new List<Gradee>() {
-                   new Gradee()
+                new List<Gradee>
+                {
+                   new Gradee
                    {
                        Date = DateTime.Now,
                        Grade = "A",
                        Score = 90
+                   },
+                   new Gradee
+                   {
+                       Date = DateTime.Today,
+                       Grade = "B",
+                       Score = 78
                    }
                 });
 

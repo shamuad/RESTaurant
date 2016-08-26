@@ -2,9 +2,9 @@
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using RESTaurant.App.Domain;
-using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Configuration.Abstractions;
 
 namespace RESTaurant.App.Repository
 {
@@ -14,10 +14,16 @@ namespace RESTaurant.App.Repository
 
         public RestaurantRepository()
         {
+
+            var mongoConnectionString = ConfigurationManager.Instance.AppSettings["MongoConnectionString"];
+            var restaurantDbName = ConfigurationManager.Instance.AppSettings["RestaurantDBName"];
+            var restaurantCollectionName = ConfigurationManager.Instance.AppSettings["RestaurantCollectionName"];
+
             RegisterDocuments();
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("testdb");
-            collection = database.GetCollection<RestaurantDocument>("primer-dataset");
+
+            var client = new MongoClient(mongoConnectionString);
+            var database = client.GetDatabase(restaurantDbName);
+            collection = database.GetCollection<RestaurantDocument>(restaurantCollectionName);
         }
 
         public RestaurantDocument GetById(ObjectId id)
@@ -28,6 +34,25 @@ namespace RESTaurant.App.Repository
         public IEnumerable<RestaurantDocument> GetByName(string name)
         {
             return collection.Find(r => r.Name == name).ToList();
+        }
+
+        public IEnumerable<RestaurantDocument> GetByCuisine(string cuisine)
+        {
+            return collection.Find(r => r.Cuisine == cuisine).ToList();
+        }
+
+        public IEnumerable<RestaurantDocument> GetByStreetName(string streetName)
+        {
+            return collection.Find(r => r.Address.Street == streetName).ToList();
+        }
+
+        public RestaurantDocument GetByCoordinate(Coordinate coordinate)
+        {
+            return 
+                collection.Find(
+                    r => r.Address.Coord.XCoord == coordinate.XCoord 
+                    && r.Address.Coord.YCoord == coordinate.YCoord)
+                    .First();
         }
 
         public void Insert(RestaurantDocument restaurantDocument)
@@ -45,6 +70,12 @@ namespace RESTaurant.App.Repository
         {
             var filter = Builders<RestaurantDocument>.Filter.Eq(rd => rd.Name, restaurantName);
             collection.DeleteOne(filter);
+        }
+
+        public void DeleteByStreetName(string streetName)
+        {
+            var filter = Builders<RestaurantDocument>.Filter.Eq(rd => rd.Address.Street, streetName);
+            collection.DeleteMany(filter);
         }
 
         private void RegisterDocuments()

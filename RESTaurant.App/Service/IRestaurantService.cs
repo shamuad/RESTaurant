@@ -8,8 +8,12 @@ namespace RESTaurant.App.Service
     {
         Restaurant GetById(ObjectId id);
         IEnumerable<Restaurant> GetByName(string name);
+        IEnumerable<Restaurant> GetByCuisine(string cuisine);
+        IEnumerable<Restaurant> GeyByStreetName(string streetName);
+        Restaurant GetByCoordinate(double xCoord, double yCoord);
         void Insert(Restaurant restaurant);
         void Update(Restaurant restaurant);
         void DeleteByName(string restaurantName);
+        void DeleteByStreetName(string streetName);
     }
 }

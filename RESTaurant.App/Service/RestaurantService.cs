@@ -10,7 +10,8 @@ namespace RESTaurant.App.Service
 {
     public class RestaurantService : IRestaurantService
     {
-        private IRestaurantRepository repository;
+        private readonly IRestaurantRepository repository;
+        private List<Restaurant> restaurantList;
 
         public RestaurantService()
         {
@@ -24,7 +25,7 @@ namespace RESTaurant.App.Service
 
         public IEnumerable<Restaurant> GetByName(string name)
         {
-            var restaurantList = new List<Restaurant>();
+            restaurantList = new List<Restaurant>();
 
             foreach (var item in repository.GetByName(name))
             {
@@ -32,6 +33,35 @@ namespace RESTaurant.App.Service
                 restaurantList.Add(restaurant.Load(item));
             }
             return restaurantList;
+        }
+
+        public IEnumerable<Restaurant> GetByCuisine(string cuisine)
+        {
+            restaurantList = new List<Restaurant>();
+
+            foreach (var item in repository.GetByCuisine(cuisine))
+            {
+                var restaurant = new Restaurant();
+                restaurantList.Add(restaurant.Load(item));
+            }
+            return restaurantList;
+        }
+
+        public IEnumerable<Restaurant> GeyByStreetName(string streetName)
+        {
+            restaurantList = new List<Restaurant>();
+
+            foreach (var item in repository.GetByStreetName(streetName))
+            {
+                var restaurant = new Restaurant();
+                restaurantList.Add(restaurant.Load(item));
+            }
+            return restaurantList;
+        }
+
+        public Restaurant GetByCoordinate(double xCoord,double yCoord)
+        {
+            return new Restaurant().Load(repository.GetByCoordinate(new Coordinate(xCoord, yCoord)));
         }
 
         public void Insert(Restaurant restaurant)
@@ -58,6 +88,11 @@ namespace RESTaurant.App.Service
         public void DeleteByName(string restaurantName)
         {
             repository.DeleteByName(restaurantName);
+        }
+
+        public void DeleteByStreetName(string streetName)
+        {
+            repository.DeleteByStreetName(streetName);
         }
     }
 }
