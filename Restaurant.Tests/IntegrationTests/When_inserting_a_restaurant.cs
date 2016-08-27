@@ -63,7 +63,7 @@ namespace Restaurant.Tests.IntegrationTests
                 Address = new Address()
                 {
                     Building = "A BLOK",
-                    Coord = new List<double>() { 12D,15D},
+                    Coord = new Coordinate(12D,15D),
                     Street = "LEYLAK",
                     Zipcode = "34050"
                 }

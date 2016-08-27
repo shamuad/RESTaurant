@@ -82,8 +82,11 @@
   <ItemGroup>
     <Compile Include="IntegrationTests\RestaurantRepositoryHelper.cs" />
     <Compile Include="IntegrationTests\When_deleting_a_restaurant.cs" />
+    <Compile Include="IntegrationTests\When_getting_a_restaurant\by_Coordinate.cs" />
+    <Compile Include="IntegrationTests\When_getting_a_restaurant\by_Cuisine.cs" />
     <Compile Include="IntegrationTests\When_getting_a_restaurant\by_id.cs" />
     <Compile Include="IntegrationTests\When_getting_a_restaurant\by_name.cs" />
+    <Compile Include="IntegrationTests\When_getting_a_restaurant\by_StreetName.cs" />
     <Compile Include="IntegrationTests\When_inserting_a_restaurant.cs" />
     <Compile Include="IntegrationTests\When_updating_a_restaurant.cs" />
     <Compile Include="Program.cs" />

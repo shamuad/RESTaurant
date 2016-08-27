@@ -57,7 +57,7 @@ namespace Restaurant.Tests.IntegrationTests.When_getting_a_restaurant
             var address = new Address
             {
                 Building = "Building",
-                Coord = new List<double> { 12D, 15D },
+                Coord = new Coordinate(12D,15D),
                 Street = "street",
                 Zipcode = "zipcode"
             };

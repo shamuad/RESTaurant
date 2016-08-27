@@ -49,10 +49,7 @@ namespace Restaurant.Tests.IntegrationTests
                 RestaurantId = "Rest1234",
                 Address = new Address()
                 {
-                    Building = "A BLOK",
-                    Coord = new List<double>() { 12D, 15D },
-                    Street = "LEYLAK",
-                    Zipcode = "34050"
+                    
                 }
             };
 

@@ -13,11 +13,19 @@ namespace RESTaurant.App
 
         static void Main(string[] args)
         {
-            CheckGetById();
-            CheckGetByName();
-            CheckInsert();
+            //CheckGetById();
+            //CheckGetByName();
+            //CheckInsert();
             //CheckUpdate();
             //CheckDelete();
+            CheckGetByCuisine();
+            //CheckGetByStreetName();
+            //CheckGetByCoordinate();
+        }
+
+        private static void CheckGetByCuisine()
+        {
+            var restaurant = restaurantService.GetByCuisine("Turkish Cuisine");
         }
 
         private static void CheckDelete()
@@ -61,7 +69,7 @@ namespace RESTaurant.App
             var address = new Address
             {
                 Building = "Building",
-                Coord = new List<double> { 12D, 15D },
+                Coord = new Coordinate(12D, 15D),
                 Street = "street",
                 Zipcode = "zipcode"
             };
